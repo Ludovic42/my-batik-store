@@ -1,0 +1,46 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .item-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .item-details {
+    text-align: center;
+  }
+  
+  .item-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 12px;
+  }
+  
+  .item-category {
+    font-size: 1rem;
+    color: #777;
+  }
+  
+  .item-price {
+    font-size: 1.25rem;
+    color: green;
+    margin-top: 8px;
+  }
+  
+  .item-creator {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 12px;
+  }
+  
