@@ -1,8 +1,6 @@
 import { AbstractItem } from './AbstractItem';
 
 export class ShirtItem extends AbstractItem {
-  colors: string[];
-
   constructor(
     id: string,
     name: string,
@@ -11,11 +9,12 @@ export class ShirtItem extends AbstractItem {
     creatorId: string,
     image: string,
     description: string,
-    size: number[],
+    size: string,
     colors: string[],
+    createdAt: Date,
     secondaryImages: string[]
   ) {
-    super(id, name, price, category, creatorId, image, description, size, colors, secondaryImages);
+    super(id, name, price, category, creatorId, image, description, size, colors, createdAt, secondaryImages);
   }
 
   

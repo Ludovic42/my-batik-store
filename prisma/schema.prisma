@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  role         String   @default("user")
+  createdAt    DateTime @default(now())
+  orders       Order[]
+  reviews      Review[]
+  
+  // Optional relation to Creator (simply reference the creator)
+  creator      Creator?
+}
+
+model Creator {
+  id        String   @id @default(uuid())
+  userId    String   @unique  // Each creator is tied to a unique user
+  name      String
+  bio       String?
+  location  String?
+  avatarUrl String?
+  
+  // Relation to User (this side owns the relation)
+  user      User     @relation(fields: [userId], references: [id])
+  
+  // Relation to Item
+  items     Item[]
+}
+model Item {
+  id          String   @id @default(uuid())
+  creatorId   String
+  creator     Creator  @relation(fields: [creatorId], references: [id])
+  name        String
+  category    String?
+  price       Float
+  description String?
+  widthCm     Int?
+  heightCm    Int?
+  size        String?
+  colors      String[]
+  mainImage   String?
+  createdAt   DateTime @default(now())
+  images      ItemImage[]
+  orderItems  OrderItem[]
+  reviews     Review[]
+}
+
+model ItemImage {
+  id       String @id @default(uuid())
+  itemId   String
+  item     Item   @relation(fields: [itemId], references: [id])
+  imageUrl String
+  orderIndex Int @default(0)
+}
+
+model Order {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  totalPrice Float
+  status     String  @default("pending")
+  createdAt  DateTime @default(now())
+  items      OrderItem[]
+}
+
+model OrderItem {
+  id           String   @id @default(uuid())
+  orderId      String
+  order        Order    @relation(fields: [orderId], references: [id])
+  itemId       String
+  item         Item     @relation(fields: [itemId], references: [id])
+  quantity     Int
+  priceAtPurchase Float
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  userId    String
+  itemId    String
+  rating    Int      @default(0)
+  comment   String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  item      Item     @relation(fields: [itemId], references: [id])
+}

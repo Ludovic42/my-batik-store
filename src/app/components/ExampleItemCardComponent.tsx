@@ -1,10 +1,10 @@
 import React from 'react';
 import './item.css'; // Assurez-vous d'importer le fichier CSS
-import { Shirt } from '../classes/ShirtItem';
+import { ShirtItem } from '../classes/ShirtItem';
 import Image from 'next/image';
 
 const ExampleItemCardComponent: React.FC = () => {
-    const shirt = new Shirt(
+    const shirt = new ShirtItem(
       '1',
       'Cotton Shirt',
       25,
@@ -12,9 +12,9 @@ const ExampleItemCardComponent: React.FC = () => {
       'creator1',
       'shirt-image.jpg',
       'A comfortable cotton shirt.',
-      ['shirt-image-1.jpg', 'shirt-image-2.jpg'],
-      'M',
-      ['Red', 'Blue', 'Green']
+      ['M'],
+      ['Red', 'Blue', 'Green'],
+      ['shirt-image-1.jpg', 'shirt-image-2.jpg']
     );
   
     shirt.displayInfo();  // This uses the method from the abstract class

@@ -5,8 +5,8 @@ export class TableclothItem extends AbstractItem {
   //length: string;  // Example: "120cm" in size
   //width: string;   // Example: "90cm"
 
-  constructor(id: string, name: string, price: number, category: string, creatorId: string, image: string, description: string, size: string[], colors: string[], secondaryImages: string[]) {
-    super(id, name, price, category, creatorId, image, description, size, colors, secondaryImages);
+  constructor(id: string, name: string, price: number, category: string, creatorId: string, image: string, description: string, size: string, colors: string[], createdAt: Date, secondaryImages: string[]) {
+    super(id, name, price, category, creatorId, image, description, size, colors, createdAt, secondaryImages);
   }
 
   calculateDiscount(): number {
